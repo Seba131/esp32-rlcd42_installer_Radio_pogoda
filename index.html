@@ -246,20 +246,6 @@
     }
     .lang-btn:hover:not(.active) { background: rgba(255,255,255,0.22); }
 
-    /* ===== Linki do filmu / forum na samej górze ===== */
-    .video-links {
-      font-size: 1.02rem;
-      font-weight: 600;
-      line-height: 1.9;
-      text-align: center;
-      margin: -14px 0 16px;
-    }
-    .video-links a {
-      color: #7dd3fc;
-      text-decoration: none;
-    }
-    .video-links a:hover { text-decoration: underline; }
-
     /* ===== Notatka przeglądarki na górze ===== */
     .note-top {
       font-size: 0.78rem;
@@ -812,10 +798,10 @@
       <button class="lang-btn" data-lang="uk">🇺🇦 UK</button>
     </div>
 
-    <h1>📻 ESP32 Radio (Sebastian Piwowarski)</h1>
+    <h1>📻 ESP32-S3-RLCD-4.2 (radio+pogoda)</h1>
+    <p style="margin:-8px 0 10px; font-size:1.1rem; font-weight:600; color:rgba(255,255,255,0.75);">Sebastian Piwowarski</p>
     <p style="margin:-10px 0 12px; font-size:0.88rem; font-weight:700; color:#7dd3fc; letter-spacing:0.04em;">ESP32-S3 N16R8 · 16 MB flash · 8 MB PSRAM</p>
     <p><span class="fw-ver" id="fw-version">wersja …</span></p>
-    <p class="video-links" data-i18n-html="video-links">🎬 <a href="https://youtu.be/5PVop159DK0" target="_blank" rel="noopener">Film instruktażowy na YouTube</a><br>💬 <a href="https://www.elektroda.pl/rtvforum/topic4176357.html" target="_blank" rel="noopener">Wątek na Elektroda.pl</a><br>🎬 <a href="https://www.youtube.com/watch?v=LqdZ1_Y6ivk" target="_blank" rel="noopener">Stara wieża Daewoo + ESP32 = Nowoczesne radio z panelem OLED!</a></p>
     <p class="note-top" data-i18n-html="note">
       Wymagana przeglądarka <b>Chrome</b> lub <b>Edge</b> na komputerze (Web Serial API).<br>
       Firefox i Safari oraz telefony nie są obsługiwane.
@@ -823,14 +809,13 @@
     <p class="sub" data-i18n="subtitle">Wgraj firmware bezpośrednio z przeglądarki — bez instalowania żadnych programów.</p>
 
     <div class="ports-info">
-      <b data-i18n="ports-title">📌 Uwaga: logi/komendy przez USB mogą przestać odpowiadać po chwili</b>
+      <b data-i18n="ports-title">📌 Uwaga: logi/komendy działają tylko przez port UART (nie przez USB)</b>
       <span class="hint" data-i18n-html="ports-hint">
-        Ta płytka ma jedno gniazdo USB-C (natywny port ESP32-S3) — wgrywanie firmware działa
-        przez nie niezawodnie. Natomiast <b>monitor portu szeregowego (logi, komendy) potrafi
-        przestać odpowiadać jakiś czas po starcie</b> — to znany, potwierdzony problem na poziomie
-        układu/frameworku (<a href="https://github.com/pioarduino/platform-espressif32/issues/514" target="_blank" rel="noopener">zgłoszenie #514</a>),
-        niezwiązany z samym radiem. Do bieżącej konfiguracji (WiFi, stacje, ustawienia) używaj
-        panelu WWW urządzenia zamiast terminala — działa niezawodnie przez cały czas.
+        Logi i komendy działają tylko przez gniazdo <b>„UART"</b> — <b>musisz do niego dołożyć osobny
+        konwerter/przejściówkę USB-UART (USB-TTL)</b>, płytka go nie ma wbudowanego. Natywne gniazdo <b>„USB"</b>
+        (USB-C) służy wyłącznie do wgrywania firmware — po podłączeniu do niego terminal nic nie pokaże.
+        Do bieżącej konfiguracji (WiFi, stacje, ustawienia) używaj panelu WWW urządzenia zamiast
+        terminala — działa niezawodnie przez cały czas.
       </span>
     </div>
 
@@ -916,7 +901,8 @@
       </p>
       <div class="erase-tip" style="background:rgba(64,170,255,0.16);border-color:rgba(90,180,255,0.5)" data-i18n-html="term-uart-tip">
         🔌 <b style="color:#9fd2ff">Podłącz kabel do portu „UART"!</b><br>
-        Logi i komendy działają <b>tylko</b> przez gniazdo „UART" (z mostkiem USB-UART).
+        Logi i komendy działają <b>tylko</b> przez gniazdo „UART" — <b>potrzebny jest do tego osobny
+        konwerter/przejściówka USB-UART (USB-TTL)</b>, płytka go nie ma wbudowanego.
         Natywny port „USB" służy do wgrywania, ale tutaj nic nie pokaże.
       </div>
 
@@ -1105,8 +1091,8 @@
       'page-title':       'ESP32 Radio — Instalator',
       'fw-prefix':        'wersja',
       'subtitle':         'Wgraj firmware bezpośrednio z przeglądarki — bez instalowania żadnych programów.',
-      'ports-title':      '📌 Uwaga: logi/komendy przez USB mogą przestać odpowiadać po chwili',
-      'ports-hint':       'Ta płytka ma jedno gniazdo USB-C (natywny port ESP32-S3) — wgrywanie firmware działa przez nie niezawodnie. Natomiast <b>monitor portu szeregowego (logi, komendy) potrafi przestać odpowiadać jakiś czas po starcie</b> — to znany, potwierdzony problem na poziomie układu/frameworku (<a href="https://github.com/pioarduino/platform-espressif32/issues/514" target="_blank" rel="noopener">zgłoszenie #514</a>), niezwiązany z samym radiem. Do bieżącej konfiguracji (WiFi, stacje, ustawienia) używaj panelu WWW urządzenia zamiast terminala — działa niezawodnie przez cały czas.',
+      'ports-title':      '📌 Uwaga: logi/komendy działają tylko przez port UART (nie przez USB)',
+      'ports-hint':       'Logi i komendy działają tylko przez gniazdo <b>„UART"</b> — <b>musisz do niego dołożyć osobny konwerter/przejściówkę USB-UART (USB-TTL)</b>, płytka go nie ma wbudowanego. Natywne gniazdo <b>„USB"</b> (USB-C) służy wyłącznie do wgrywania firmware — po podłączeniu do niego terminal nic nie pokaże. Do bieżącej konfiguracji (WiFi, stacje, ustawienia) używaj panelu WWW urządzenia zamiast terminala — działa niezawodnie przez cały czas.',
       'btn-install':      '⚡ Zainstaluj',
       'unsupported':      'Twoja przeglądarka nie obsługuje Web Serial.<br>Użyj <b>Google Chrome</b> lub <b>Microsoft Edge</b> na komputerze (nie na telefonie).',
       'not-allowed':      'Wgrywanie działa tylko przez połączenie HTTPS.',
@@ -1118,7 +1104,7 @@
       'faq-issues-body':  '<h4>❌ „Failed to open serial port”</h4><p>Port COM jest zajęty przez inny program. Zamknij <b>monitor szeregowy</b> (Arduino IDE, PlatformIO, PuTTY) i wszelkie inne karty z instalatorem, odepnij i wepnij kabel USB, odśwież stronę i spróbuj ponownie.</p><h4>🔌 Nie widać urządzenia / brak portu</h4><p>Użyj kabla USB <b>do przesyłu danych</b> (nie tylko do ładowania). Sprawdź też inne gniazdo USB. Na niektórych płytkach trzeba wpiąć kabel w port oznaczony <kbd>USB</kbd>, a nie <kbd>UART/COM</kbd>.</p><h4>🛠️ Płytka nie wchodzi w tryb wgrywania</h4><p>Ręcznie: przytrzymaj przycisk <kbd>BOOT</kbd>, krótko naciśnij <kbd>RESET</kbd> (lub <kbd>EN</kbd>), puść <kbd>BOOT</kbd>. Potem znów kliknij <b>Zainstaluj</b>.</p><h4>🌐 Przycisk „Zainstaluj” nie reaguje</h4><p>Użyj <b>Google Chrome</b> lub <b>Microsoft Edge</b> na komputerze. Firefox, Safari oraz telefony i tablety nie obsługują wgrywania (brak Web Serial API).</p>',
       'term-title':       '🖥️ Terminal / Konsola — logi i komendy',
       'term-intro':       'Podgląd logów z urządzenia i wysyłanie komend. Przydatne, gdy coś nie działa — możesz <b>skopiować logi i wysłać je autorowi</b>.',
-      'term-uart-tip':    '🔌 <b style="color:#9fd2ff">Podłącz kabel do portu „UART”!</b><br>Logi i komendy działają <b>tylko</b> przez gniazdo „UART” (z mostkiem USB-UART). Natywny port „USB” służy do wgrywania, ale tutaj nic nie pokaże.',
+      'term-uart-tip':    '🔌 <b style="color:#9fd2ff">Podłącz kabel do portu „UART”!</b><br>Logi i komendy działają <b>tylko</b> przez gniazdo „UART” — <b>potrzebny jest do tego osobny konwerter/przejściówka USB-UART (USB-TTL)</b>, płytka go nie ma wbudowanego. Natywny port „USB” służy do wgrywania, ale tutaj nic nie pokaże.',
       'btn-connect':      '🔌 Połącz',
       'btn-disconnect':   'Rozłącz',
       'btn-copy':         '📋 Skopiuj logi',
@@ -1128,14 +1114,13 @@
       'term-note':        'Działa tylko w <b>Chrome/Edge</b> na komputerze. Terminal i instalator nie mogą być połączone naraz — jeśli przed chwilą wgrywałeś firmware, odśwież stronę.',
       'note':             'Wymagana przeglądarka <b>Chrome</b> lub <b>Edge</b> na komputerze (Web Serial API).<br>Firefox i Safari oraz telefony nie są obsługiwane.',
       'flash-warn':       '⚠️ <b>Wgrywanie trwa już ponad 90 sekund — coś może być nie tak.</b><br>Sprawdź poniższe i odśwież stronę:<ul><li>Użyj portu <b>UART</b> (nie natywnego USB) — tylko ten działa stabilnie</li><li>Sprawdź czy kabel USB przesyła dane (nie tylko ładuje)</li><li>Podłącz bezpośrednio do komputera — bez hubów USB</li><li>Wejdź ręcznie w tryb wgrywania: przytrzymaj <kbd>BOOT</kbd>, naciśnij <kbd>RST</kbd>, puść <kbd>BOOT</kbd> — potem odśwież stronę i spróbuj ponownie</li></ul>',
-      'video-links':      '🎬 <a href="https://youtu.be/5PVop159DK0" target="_blank" rel="noopener">Film instruktażowy na YouTube</a><br>💬 <a href="https://www.elektroda.pl/rtvforum/topic4176357.html" target="_blank" rel="noopener">Wątek na Elektroda.pl</a><br>🎬 <a href="https://www.youtube.com/watch?v=LqdZ1_Y6ivk" target="_blank" rel="noopener">Stara wieża Daewoo + ESP32 = Nowoczesne radio z panelem OLED!</a>',
     },
     en: {
       'page-title':       'ESP32 Radio — Installer',
       'fw-prefix':        'version',
       'subtitle':         'Flash firmware directly from your browser — no software installation required.',
-      'ports-title':      '📌 Note: USB logs/commands may stop responding after a while',
-      'ports-hint':       'This board has a single USB-C port (native ESP32-S3 USB) — firmware flashing works reliably through it. However, <b>the serial monitor (logs, commands) can stop responding some time after boot</b> — a known, confirmed issue at the chip/framework level (<a href="https://github.com/pioarduino/platform-espressif32/issues/514" target="_blank" rel="noopener">issue #514</a>), unrelated to the radio itself. For everyday configuration (WiFi, stations, settings) use the device’s web panel instead of the terminal — it stays reliable the whole time.',
+      'ports-title':      '📌 Note: logs/commands only work via the UART port (not USB)',
+      'ports-hint':       'Logs and commands only work through the <b>"UART"</b> socket — <b>you need to add a separate USB-UART converter/adapter (USB-TTL)</b>, the board does not have one built in. The native <b>"USB"</b> socket (USB-C) is only for flashing firmware — the terminal will show nothing there. For everyday configuration (WiFi, stations, settings) use the device’s web panel instead of the terminal — it stays reliable the whole time.',
       'btn-install':      '⚡ Install',
       'unsupported':      'Your browser does not support Web Serial.<br>Use <b>Google Chrome</b> or <b>Microsoft Edge</b> on a desktop/laptop (not on mobile).',
       'not-allowed':      'Flashing only works over an HTTPS connection.',
@@ -1147,7 +1132,7 @@
       'faq-issues-body':  '<h4>❌ "Failed to open serial port"</h4><p>The COM port is busy. Close any <b>serial monitor</b> (Arduino IDE, PlatformIO, PuTTY) and any other installer tabs, unplug and replug the USB cable, refresh the page, and try again.</p><h4>🔌 Device not visible / no port shown</h4><p>Use a <b>data USB cable</b> (not a charge-only one). Try a different USB port. On some boards the cable must go into the port labeled <kbd>USB</kbd>, not <kbd>UART/COM</kbd>.</p><h4>🛠️ Board won\'t enter flash mode</h4><p>Manually: hold <kbd>BOOT</kbd>, briefly press <kbd>RESET</kbd> (or <kbd>EN</kbd>), release <kbd>BOOT</kbd>. Then click <b>Install</b> again.</p><h4>🌐 "Install" button doesn\'t respond</h4><p>Use <b>Google Chrome</b> or <b>Microsoft Edge</b> on a desktop. Firefox, Safari, and mobile devices are not supported (no Web Serial API).</p>',
       'term-title':       '🖥️ Terminal / Console — logs and commands',
       'term-intro':       'Monitor device logs and send commands. Useful when something is wrong — you can <b>copy the logs and send them to the author</b>.',
-      'term-uart-tip':    '🔌 <b style="color:#9fd2ff">Connect the cable to the "UART" port!</b><br>Logs and commands work <b>only</b> through the "UART" socket (with USB-UART bridge). The native "USB" port is for flashing only and won\'t show anything here.',
+      'term-uart-tip':    '🔌 <b style="color:#9fd2ff">Connect the cable to the "UART" port!</b><br>Logs and commands work <b>only</b> through the "UART" socket — <b>you need a separate USB-UART converter/adapter (USB-TTL)</b> for this, the board does not have one built in. The native "USB" port is for flashing only and won\'t show anything here.',
       'btn-connect':      '🔌 Connect',
       'btn-disconnect':   'Disconnect',
       'btn-copy':         '📋 Copy logs',
@@ -1157,14 +1142,13 @@
       'term-note':        'Works only in <b>Chrome/Edge</b> on desktop. The terminal and installer cannot be connected at the same time — if you just flashed firmware, refresh the page.',
       'note':             '<b>Chrome</b> or <b>Edge</b> browser required on desktop (Web Serial API).<br>Firefox, Safari, and mobile devices are not supported.',
       'flash-warn':       '⚠️ <b>Flashing has been running for over 90 seconds — something may be wrong.</b><br>Check the following and refresh the page:<ul><li>Use the <b>UART</b> port (not native USB) — only UART works reliably</li><li>Make sure your USB cable supports data transfer (not charge-only)</li><li>Connect directly to your computer — avoid USB hubs</li><li>Enter flash mode manually: hold <kbd>BOOT</kbd>, press <kbd>RST</kbd>, release <kbd>BOOT</kbd> — then refresh and try again</li></ul>',
-      'video-links':      '🎬 <a href="https://youtu.be/5PVop159DK0" target="_blank" rel="noopener">Video tutorial on YouTube</a><br>💬 <a href="https://www.elektroda.pl/rtvforum/topic4176357.html" target="_blank" rel="noopener">Forum thread on Elektroda.pl</a><br>🎬 <a href="https://www.youtube.com/watch?v=LqdZ1_Y6ivk" target="_blank" rel="noopener">Stara wieża Daewoo + ESP32 = Nowoczesne radio z panelem OLED!</a>',
     },
     fr: {
       'page-title':       'ESP32 Radio — Installateur',
       'fw-prefix':        'version',
       'subtitle':         'Flashez le firmware directement depuis votre navigateur — sans installer aucun logiciel.',
-      'ports-title':      '📌 Remarque : les journaux/commandes USB peuvent cesser de répondre après un moment',
-      'ports-hint':       'Cette carte n’a qu’un seul port USB-C (USB natif ESP32-S3) — le flashage du firmware fonctionne de manière fiable via ce port. En revanche, <b>le moniteur série (journaux, commandes) peut cesser de répondre quelque temps après le démarrage</b> — un problème connu et confirmé au niveau de la puce/du framework (<a href="https://github.com/pioarduino/platform-espressif32/issues/514" target="_blank" rel="noopener">issue #514</a>), sans rapport avec la radio elle-même. Pour la configuration courante (WiFi, stations, paramètres), utilisez le panneau web de l’appareil plutôt que le terminal — il reste fiable en permanence.',
+      'ports-title':      '📌 Remarque : les journaux/commandes ne fonctionnent que via le port UART (pas USB)',
+      'ports-hint':       'Les journaux et commandes ne fonctionnent que via la prise <b>« UART »</b> — <b>vous devez y ajouter un convertisseur/adaptateur USB-UART séparé (USB-TTL)</b>, la carte n’en a pas intégré. La prise <b>« USB »</b> native (USB-C) sert uniquement à flasher le firmware — le terminal n’y affichera rien. Pour la configuration courante (WiFi, stations, paramètres), utilisez le panneau web de l’appareil plutôt que le terminal — il reste fiable en permanence.',
       'btn-install':      '⚡ Installer',
       'unsupported':      'Votre navigateur ne prend pas en charge Web Serial.<br>Utilisez <b>Google Chrome</b> ou <b>Microsoft Edge</b> sur ordinateur (pas sur mobile).',
       'not-allowed':      'Le flashage fonctionne uniquement via une connexion HTTPS.',
@@ -1176,7 +1160,7 @@
       'faq-issues-body':  '<h4>❌ « Failed to open serial port »</h4><p>Le port COM est occupé par un autre programme. Fermez le <b>moniteur série</b> (Arduino IDE, PlatformIO, PuTTY) et tout autre onglet avec l\'installateur, débranchez et rebranchez le câble USB, actualisez la page et réessayez.</p><h4>🔌 Appareil non visible / aucun port affiché</h4><p>Utilisez un câble USB <b>de transfert de données</b> (pas seulement de charge). Essayez aussi un autre port USB. Sur certaines cartes, le câble doit être branché sur le port <kbd>USB</kbd>, et non <kbd>UART/COM</kbd>.</p><h4>🛠️ La carte n\'entre pas en mode flashage</h4><p>Manuellement : maintenez le bouton <kbd>BOOT</kbd>, appuyez brièvement sur <kbd>RESET</kbd> (ou <kbd>EN</kbd>), relâchez <kbd>BOOT</kbd>. Puis cliquez à nouveau sur <b>Installer</b>.</p><h4>🌐 Le bouton « Installer » ne répond pas</h4><p>Utilisez <b>Google Chrome</b> ou <b>Microsoft Edge</b> sur ordinateur. Firefox, Safari ainsi que les téléphones et tablettes ne prennent pas en charge le flashage (pas de Web Serial API).</p>',
       'term-title':       '🖥️ Terminal / Console — journaux et commandes',
       'term-intro':       'Visualisez les journaux de l\'appareil et envoyez des commandes. Utile en cas de problème — vous pouvez <b>copier les journaux et les envoyer à l\'auteur</b>.',
-      'term-uart-tip':    '🔌 <b style="color:#9fd2ff">Connectez le câble au port « UART » !</b><br>Les journaux et commandes fonctionnent <b>uniquement</b> via la prise « UART » (avec pont USB-UART). Le port « USB » natif sert au flashage, mais n\'affichera rien ici.',
+      'term-uart-tip':    '🔌 <b style="color:#9fd2ff">Connectez le câble au port « UART » !</b><br>Les journaux et commandes fonctionnent <b>uniquement</b> via la prise « UART » — <b>il vous faut pour cela un convertisseur/adaptateur USB-UART séparé (USB-TTL)</b>, la carte n\'en a pas intégré. Le port « USB » natif sert au flashage, mais n\'affichera rien ici.',
       'btn-connect':      '🔌 Connecter',
       'btn-disconnect':   'Déconnecter',
       'btn-copy':         '📋 Copier les journaux',
@@ -1186,14 +1170,13 @@
       'term-note':        'Fonctionne uniquement dans <b>Chrome/Edge</b> sur ordinateur. Le terminal et l\'installateur ne peuvent pas être connectés en même temps — si vous venez de flasher le firmware, actualisez la page.',
       'note':             'Navigateur <b>Chrome</b> ou <b>Edge</b> requis sur ordinateur (Web Serial API).<br>Firefox, Safari et les appareils mobiles ne sont pas pris en charge.',
       'flash-warn':       '⚠️ <b>Le flashage dure depuis plus de 90 secondes — quelque chose semble ne pas aller.</b><br>Vérifiez les points suivants et actualisez la page :<ul><li>Utilisez le port <b>UART</b> (pas l\'USB natif) — seul celui-ci fonctionne de manière fiable</li><li>Vérifiez que le câble USB transfère des données (pas seulement la charge)</li><li>Connectez directement à l\'ordinateur — évitez les hubs USB</li><li>Entrez manuellement en mode flashage : maintenez <kbd>BOOT</kbd>, appuyez sur <kbd>RST</kbd>, relâchez <kbd>BOOT</kbd> — puis actualisez et réessayez</li></ul>',
-      'video-links':      '🎬 <a href="https://youtu.be/5PVop159DK0" target="_blank" rel="noopener">Tutoriel vidéo sur YouTube</a><br>💬 <a href="https://www.elektroda.pl/rtvforum/topic4176357.html" target="_blank" rel="noopener">Sujet sur Elektroda.pl</a><br>🎬 <a href="https://www.youtube.com/watch?v=LqdZ1_Y6ivk" target="_blank" rel="noopener">Stara wieża Daewoo + ESP32 = Nowoczesne radio z panelem OLED!</a>',
     },
     uk: {
       'page-title':       'ESP32 Radio — Інсталятор',
       'fw-prefix':        'версія',
       'subtitle':         'Прошийте firmware прямо з браузера — без встановлення жодного програмного забезпечення.',
-      'ports-title':      '📌 Увага: логи/команди через USB можуть перестати відповідати через деякий час',
-      'ports-hint':       'Ця плата має один порт USB-C (нативний USB ESP32-S3) — прошивка через нього працює надійно. Однак <b>монітор послідовного порту (логи, команди) може перестати відповідати через деякий час після старту</b> — це відома, підтверджена проблема на рівні чипа/фреймворку (<a href="https://github.com/pioarduino/platform-espressif32/issues/514" target="_blank" rel="noopener">issue #514</a>), не пов’язана із самим радіо. Для повсякденного налаштування (WiFi, станції, параметри) використовуйте веб-панель пристрою замість терміналу — вона працює надійно весь час.',
+      'ports-title':      '📌 Увага: логи/команди працюють лише через порт UART (не через USB)',
+      'ports-hint':       'Логи та команди працюють лише через роз’єм <b>«UART»</b> — <b>до нього потрібно додати окремий конвертер/перехідник USB-UART (USB-TTL)</b>, плата його не має вбудованим. Нативний роз’єм <b>«USB»</b> (USB-C) призначений лише для прошивки — термінал там нічого не покаже. Для поточного налаштування (WiFi, станції, параметри) використовуйте веб-панель пристрою замість терміналу — вона працює надійно постійно.',
       'btn-install':      '⚡ Встановити',
       'unsupported':      'Ваш браузер не підтримує Web Serial.<br>Використайте <b>Google Chrome</b> або <b>Microsoft Edge</b> на комп’ютері (не на телефоні).',
       'not-allowed':      'Прошивка працює лише через HTTPS-з’єднання.',
@@ -1205,7 +1188,7 @@
       'faq-issues-body':  '<h4>❌ «Failed to open serial port»</h4><p>Порт COM зайнятий іншою програмою. Закрийте <b>монітор порту</b> (Arduino IDE, PlatformIO, PuTTY) та всі інші вкладки з інсталятором, від’єднайте і під’єднайте USB-кабель, оновіть сторінку і спробуйте ще раз.</p><h4>🔌 Пристрій не видно / немає порту</h4><p>Використовуйте USB-кабель <b>для передачі даних</b> (не лише для заряджання). Спробуйте інший порт USB. На деяких платах кабель потрібно під’єднати до порту <kbd>USB</kbd>, а не <kbd>UART/COM</kbd>.</p><h4>🛠️ Плата не входить у режим прошивки</h4><p>Вручну: утримуйте кнопку <kbd>BOOT</kbd>, коротко натисніть <kbd>RESET</kbd> (або <kbd>EN</kbd>), відпустіть <kbd>BOOT</kbd>. Потім знову натисніть <b>Встановити</b>.</p><h4>🌐 Кнопка «Встановити» не реагує</h4><p>Використайте <b>Google Chrome</b> або <b>Microsoft Edge</b> на комп’ютері. Firefox, Safari, а також телефони і планшети не підтримують прошивку (немає Web Serial API).</p>',
       'term-title':       '🖥️ Термінал / Консоль — логи та команди',
       'term-intro':       'Перегляд логів пристрою та надсилання команд. Корисно, коли щось не працює — можна <b>скопіювати логи і надіслати їх автору</b>.',
-      'term-uart-tip':    '🔌 <b style="color:#9fd2ff">Підключіть кабель до порту «UART»!</b><br>Логи та команди працюють <b>лише</b> через гніздо «UART» (з мостом USB-UART). Нативний порт «USB» служить для прошивки, але тут нічого не покаже.',
+      'term-uart-tip':    '🔌 <b style="color:#9fd2ff">Підключіть кабель до порту «UART»!</b><br>Логи та команди працюють <b>лише</b> через гніздо «UART» — <b>для цього потрібен окремий конвертер/перехідник USB-UART (USB-TTL)</b>, плата його не має вбудованим. Нативний порт «USB» служить для прошивки, але тут нічого не покаже.',
       'btn-connect':      '🔌 Підключити',
       'btn-disconnect':   'Відключити',
       'btn-copy':         '📋 Скопіювати логи',
@@ -1215,7 +1198,6 @@
       'term-note':        'Працює лише в <b>Chrome/Edge</b> на комп’ютері. Термінал та інсталятор не можуть бути підключені одночасно — якщо ви щойно прошивали firmware, оновіть сторінку.',
       'note':             'Потрібен браузер <b>Chrome</b> або <b>Edge</b> на комп’ютері (Web Serial API).<br>Firefox, Safari та мобільні пристрої не підтримуються.',
       'flash-warn':       '⚠️ <b>Прошивка триває вже понад 90 секунд — можливо, щось не так.</b><br>Перевірте наступне і оновіть сторінку:<ul><li>Використовуйте порт <b>UART</b> (не нативний USB) — лише він працює стабільно</li><li>Перевірте, чи USB-кабель передає дані (а не лише заряджає)</li><li>Підключіть напряму до комп’ютера — без USB-хабів</li><li>Увійдіть у режим прошивки вручну: утримуйте <kbd>BOOT</kbd>, натисніть <kbd>RST</kbd>, відпустіть <kbd>BOOT</kbd> — потім оновіть сторінку і спробуйте ще раз</li></ul>',
-      'video-links':      '🎬 <a href="https://youtu.be/5PVop159DK0" target="_blank" rel="noopener">Відеоінструкція на YouTube</a><br>💬 <a href="https://www.elektroda.pl/rtvforum/topic4176357.html" target="_blank" rel="noopener">Тема на Elektroda.pl</a><br>🎬 <a href="https://www.youtube.com/watch?v=LqdZ1_Y6ivk" target="_blank" rel="noopener">Stara wieża Daewoo + ESP32 = Nowoczesne radio z panelem OLED!</a>',
     }
   };
 
