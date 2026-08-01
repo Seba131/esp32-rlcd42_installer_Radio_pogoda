@@ -1,7 +1,7 @@
 {
   "name": "ESP32-S3-RLCD-4.2 (radio+pogoda)",
   "version": "1.0.0",
-  "build_date": "29.07.2026",
+  "build_date": "01.08.2026",
   "new_install_improv_wait_time": 0,
   "builds": [
     {
